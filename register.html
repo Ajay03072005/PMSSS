@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style1.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <title>OTP Verification and Registration</title>
+  <script>
+    function moveToNext(currentInput, nextInputId) {
+        if (currentInput.value.length === 1) {
+            document.getElementById(nextInputId).focus();
+        }
+    }
+  </script>
+</head>
+<body>
+  <div class="otp-card">
+    <h1>Registration and OTP Verification</h1>
+    
+    <!-- Registration Fields -->
+    <input type="text" id="first-name" placeholder="Enter your first name" required><br>
+    <input type="text" id="last-name" placeholder="Enter your last name" required><br>
+    <input type="email" id="email" placeholder="Enter your email" required><br>
+    <input type="password" id="password" placeholder="Enter your password" required><br>
+
+    <!-- OTP Fields -->
+    <div class="otp-card-inputs">
+      <input type="text" maxlength="1" autofocus oninput="moveToNext(this, 'otp2')">
+      <input type="text" maxlength="1" id="otp2" oninput="moveToNext(this, 'otp3')">
+      <input type="text" maxlength="1" id="otp3" oninput="moveToNext(this, 'otp4')">
+      <input type="text" maxlength="1" id="otp4" oninput="moveToNext(this, 'otp5')">
+      <input type="text" maxlength="1" id="otp5" oninput="moveToNext(this, 'otp6')">
+      <input type="text" maxlength="1" id="otp6">
+    </div>
+    
+    <p>Didn't get the OTP? <a href="#">Resend</a></p>
+    <button>Verify</button>
+  </div>
+
+  <script src="script1.js"></script>
+</body>
+</html>

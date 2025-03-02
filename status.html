@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PMSSS Scholarship Status Tracking</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        h2 {
+            color: #ff0000;
+        }
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+        }
+        label, input, select {
+            display: block;
+            margin-bottom: 10px;
+            width: 100%;
+            max-width: 400px;
+        }
+        input, select {
+            padding: 8px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .status {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .stage {
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+        }
+        .pending {
+            background-color: #fff3cd;
+            border: 1px solid #ffeeba;
+            color: #856404;
+        }
+        .completed {
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+        .captcha-box {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        .captcha-box span {
+            font-size: 22px;
+            font-weight: bold;
+            letter-spacing: 3px;
+            background-color: #eee;
+            padding: 10px;
+            border-radius: 5px;
+            user-select: none;
+        }
+        .refresh-captcha {
+            cursor: pointer;
+            color: #007bff;
+            font-size: 14px;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h2>PMSSS 2021-22 - Scholarship Status Tracking</h2>
+    <form id="statusForm">
+        <label for="appId">Application Serial No./User Id:</label>
+        <input type="text" id="appId" name="appId" required>
+
+        <label for="district">Applied District:</label>
+        <select id="district" name="district" required>
+            <option value="">Select District</option>
+            <option value="Murshidabad">Jammu & kashmir</option>
+        
+        </select>
+
+        <label for="session">Session:</label>
+        <select id="session" name="session" required>
+            <option value="">Select Session</option>
+            <option value="2021-22">2021-22</option>
+            <option value="2021-22">2022-23</option>
+            <option value="2021-22">2023-24</option>
+           
+        </select>
+
+        <div class="captcha-box">
+            <span id="captchaDisplay"></span>
+            <span class="refresh-captcha" onclick="generateCaptcha()">Refresh CAPTCHA</span>
+        </div>
+        
+        <label for="captcha">Enter the CAPTCHA:</label>
+        <input type="text" id="captchaInput" name="captcha" placeholder="Enter the text from above" required>
+
+        <button type="submit">Check Status</button>
+    </form>
+
+    <div id="statusOutput" class="status" style="display:none;">
+        <h3>PMSSS Scholarship Application Status</h3>
+        <div id="statusSubmitted" class="stage pending">Submitted - Pending</div>
+        <div id="statusDocVerification" class="stage pending">Document Verification - Pending</div>
+        <div id="statusSAGVerification" class="stage pending">SAG Verification - Pending</div>
+        <div id="statusFinanceVerification" class="stage pending">Finance Verification - Pending</div>
+        <div id="statusPayment" class="stage pending">Payment - Pending</div>
+    </div>
+
+    <script>
+        let captcha;
+
+        // Function to generate random CAPTCHA
+        function generateCaptcha() {
+            const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+            captcha = '';
+            for (let i = 0; i < 6; i++) {
+                captcha += chars[Math.floor(Math.random() * chars.length)];
+            }
+            document.getElementById('captchaDisplay').innerText = captcha;
+        }
+
+        // Initial CAPTCHA generation
+        generateCaptcha();
+
+        // Form submission event
+        document.getElementById('statusForm').addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevent form submission
+
+            // Get form values
+            const appId = document.getElementById('appId').value;
+            const district = document.getElementById('district').value;
+            const session = document.getElementById('session').value;
+            const captchaInput = document.getElementById('captchaInput').value;
+
+            // Conditional validation for empty fields
+            if (appId === '') {
+                alert('Please enter your Application Serial No./User ID.');
+                return;
+            }
+
+            if (district === '') {
+                alert('Please select your applied district.');
+                return;
+            }
+
+            if (session === '') {
+                alert('Please select the session.');
+                return;
+            }
+
+            // CAPTCHA validation
+            if (captchaInput !== captcha) {
+                alert('Incorrect CAPTCHA. Please try again.');
+                generateCaptcha(); // Generate a new CAPTCHA
+                return;
+            }
+
+            // Show the status output
+            const statusOutput = document.getElementById('statusOutput');
+            statusOutput.style.display = 'block';
+
+            // Mock Data for Statuses (This could come from your server)
+            const mockStatus = {
+                submitted: true, // true means "Completed"
+                docVerification: false,
+                sagVerification: false,
+                financeVerification: false,
+                payment: false
+            };
+
+            // Update statuses based on the mock data
+            updateSequentialStatus(mockStatus);
+        });
+
+        // Function to update statuses sequentially
+        function updateSequentialStatus(mockStatus) {
+            const stages = [
+                { id: 'statusSubmitted', key: 'submitted' },
+                { id: 'statusDocVerification', key: 'docVerification' },
+                { id: 'statusSAGVerification', key: 'sagVerification' },
+                { id: 'statusFinanceVerification', key: 'financeVerification' },
+                { id: 'statusPayment', key: 'payment' }
+            ];
+
+            // Loop through each stage and check its status sequentially
+            for (let i = 0; i < stages.length; i++) {
+                const stage = stages[i];
+                
+                // If Document Verification is Pending, all subsequent stages will stay Pending
+                if (stage.key === 'docVerification' && !mockStatus[stage.key]) {
+                    break; // Stop progression if Document Verification is Pending
+                }
+
+                // Update the status of each stage
+                if (mockStatus[stage.key]) {
+                    updateStatus(stage.id, true); // Mark stage as completed
+                }
+            }
+        }
+
+        // Function to update the status dynamically
+        function updateStatus(elementId, isCompleted) {
+            const element = document.getElementById(elementId);
+            if (isCompleted) {
+                element.classList.remove('pending');
+                element.classList.add('completed');
+                element.innerText = element.innerText.replace('Pending', 'Completed');
+            }
+        }
+    </script>
+</body>
+</html>

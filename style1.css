@@ -1,0 +1,131 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+* {
+    box-sizing: border-box;
+}
+h1{
+    margin: 0;
+}
+body{
+    font-family: "Poppins",sans-serif;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url();
+    background-size: cover;
+    height: 100dvh;
+}
+.otp-card{
+    text-align: center;
+    background-color: white;
+    border-radius: 20px;
+    padding: 3rem;
+    box-shadow: 0 10px 40px -20px black;
+}
+
+.otp-card-input{
+    margin: 60px 0;
+    display: grid;
+    gap: 30px;
+    justify-content: baseline;
+    grid-template-columns: repeat(6,auto);
+}
+.otp-card-inputs input{
+    width: 60px;
+    height: 50px;
+    font-size: 20px;
+    text-align: center;
+    border-radius: 10px;
+    border: 1px solid black;
+}
+.otp-card-input input:focus{
+    outline: 2px solid black;
+    border-color: transparent;
+}
+.otp-card button{
+    background-color: black;
+    border: none;
+    padding: 15px 50px;
+    font-size: 18px;
+    color: white;
+    border-radius: 20px;
+    cursor: pointer;
+    margin-top: 15px;
+}
+.otp-card button:hover{
+    opacity: .9;
+}
+.otp-card button[disabled]{
+    opacity: .6;
+    cursor: default;
+}
+
+#email
+{
+    width: 300px;
+    height: 50px;
+    font-size: 20px;
+    border-radius: 10px;
+    border: 1px solid black;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    border: none;
+    border: 1px solid;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 100;
+    font-style: normal;
+    text-align: center;
+    cursor: pointer;
+}
+#password
+{
+    width: 300px;
+    height: 50px;
+    font-size: 20px;
+    border-radius: 10px;
+    border: 1px solid black;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    border: none;
+    border: 1px solid;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 100;
+    font-style: normal;
+    text-align: center;
+    cursor: pointer;
+}
+#first-name
+{
+    width: 300px;
+    height: 50px;
+    font-size: 20px;
+    border-radius: 10px;
+    border: 1px solid black;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    border: none;
+    border: 1px solid;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 100;
+    font-style: normal;
+    text-align: center;
+    cursor: pointer;
+}
+#last-name
+{
+    width: 300px;
+    height: 50px;
+    font-size: 20px;
+    border-radius: 10px;
+    border: 1px solid black;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    border: none;
+    border: 1px solid;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 100;
+    font-style: normal;
+    text-align: center;  
+    cursor: pointer;
+}

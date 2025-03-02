@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple CAPTCHA</title>
+    <style>
+        #captcha-container {
+            display: flex;
+            align-items: center;
+        }
+        #captcha-image {
+            border: 1px solid #000;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <form id="captcha-form" action="/submit-captcha" method="post">
+        <div id="captcha-container">
+            <canvas id="captcha-image" width="120" height="40"></canvas>
+            <button type="button" onclick="generateCaptcha()">Refresh</button>
+        </div>
+        <input type="text" id="captcha-input" name="captcha" placeholder="Enter CAPTCHA">
+        <input type="submit" value="Submit">
+    </form>
+
+    <script>
+        function generateCaptcha() {
+            const canvas = document.getElementById('captcha-image');
+            const ctx = canvas.getContext('2d');
+            const captchaCode = Math.random().toString(36).substring(2, 8); // Generate a random string
+            
+            // Clear the canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Set font and draw text
+            ctx.font = '24px Arial';
+            ctx.fillText(captchaCode, 10, 30);
+            
+            // Store the CAPTCHA code for validation
+            // Note: In a real-world scenario, you'd send this to the server
+            document.getElementById('captcha-form').dataset.captcha = captchaCode;
+        }
+
+        // Generate CAPTCHA on page load
+        window.onload = generateCaptcha;
+    </script>
+</body>
+</html>

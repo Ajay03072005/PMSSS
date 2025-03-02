@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OTP Verification</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+  background-color: #f2f2f2;
+}
+
+.container {
+  text-align: center;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 300px;
+}
+
+h2 {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+input[type="text"] {
+  padding: 10px;
+  width: 100%;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+button {
+  padding: 10px 20px;
+  border: none;
+  background-color: #4CAF50;
+  color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Enter Your Mobile Number</h2>
+
+    <!-- Mobile Number Section -->
+    <div id="mobile-section">
+      <input type="text" id="mobileNumber" placeholder="Enter mobile number" maxlength="10">
+      <button onclick="showOtpBox()">Submit</button>
+    </div>
+
+    <!-- OTP Section (Initially Hidden) -->
+    <div id="otp-section" style="display: none;">
+      <p>Enter the OTP sent to your mobile number:</p>
+      <input type="text" id="otp" placeholder="Enter OTP" maxlength="6">
+      <button onclick="verifyOtp()">Verify OTP</button>
+    </div>
+  </div>
+
+  <script src="#"></script>
+</body>
+</html>
